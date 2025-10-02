@@ -11,8 +11,24 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2c3e50;
+            background: linear-gradient(135deg, #87ceeb 0%, #e6f3ff 50%, #fff8dc 100%);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 223, 186, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(135, 206, 235, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 239, 213, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .container {
@@ -41,10 +57,11 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            color: #667eea;
+            color: #4682b4;
             display: flex;
             align-items: center;
             gap: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 223, 186, 0.3);
         }
 
         .nav-links {
@@ -63,7 +80,7 @@
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #4682b4;
         }
 
         main {
@@ -71,12 +88,40 @@
         }
 
         .hero {
-            background: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><circle fill="%23667eea" cx="200" cy="150" r="50" opacity="0.3"/><circle fill="%23764ba2" cx="800" cy="300" r="80" opacity="0.2"/><circle fill="%23667eea" cx="1000" cy="100" r="60" opacity="0.3"/></svg>');
+            background: linear-gradient(135deg, rgba(70, 130, 180, 0.9), rgba(135, 206, 235, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%2387ceeb" width="1200" height="600"/><circle fill="%23fff8dc" cx="200" cy="150" r="40" opacity="0.6"/><circle fill="%23ffd700" cx="800" cy="300" r="60" opacity="0.4"/><circle fill="%23fff8dc" cx="1000" cy="100" r="50" opacity="0.5"/><path d="M100,400 Q200,350 300,400 T500,400" stroke="%23ffd700" stroke-width="3" fill="none" opacity="0.7"/><path d="M700,200 Q800,150 900,200 T1100,200" stroke="%23fff8dc" stroke-width="2" fill="none" opacity="0.6"/></svg>');
             color: white;
             text-align: center;
             padding: 6rem 0;
             background-size: cover;
             background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🏐';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 20%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '🏐';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            bottom: 20%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero h1 {
@@ -94,8 +139,8 @@
         }
 
         .cta-button {
-            background: #ff6b6b;
-            color: white;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #2c3e50;
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
@@ -105,12 +150,13 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
         .cta-button:hover {
-            background: #ff5252;
+            background: linear-gradient(135deg, #ffed4e, #ffd700);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
         }
 
         .section {
@@ -137,7 +183,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #4682b4, #ffd700);
             border-radius: 2px;
         }
 
@@ -159,8 +205,8 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(70, 130, 180, 0.2);
+            border-color: #4682b4;
         }
 
         .card-icon {
@@ -183,12 +229,31 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #4682b4, #87ceeb);
             color: white;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
             transition: transform 0.3s ease;
+            border: 3px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .stat-card:hover {
@@ -202,10 +267,12 @@
         }
 
         .quiz-container {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #fff8dc, #f0f8ff);
             border-radius: 15px;
             padding: 2rem;
             margin-top: 2rem;
+            border: 2px solid #ffd700;
+            box-shadow: 0 8px 25px rgba(70, 130, 180, 0.1);
         }
 
         .question {
@@ -232,13 +299,13 @@
         }
 
         .option:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
+            border-color: #4682b4;
+            background: #e6f3ff;
         }
 
         .option.selected {
-            border-color: #667eea;
-            background: #667eea;
+            border-color: #4682b4;
+            background: linear-gradient(135deg, #4682b4, #87ceeb);
             color: white;
         }
 
@@ -290,7 +357,7 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #ffd700;
         }
 
         .footer-section a {
@@ -302,7 +369,7 @@
         }
 
         .footer-section a:hover {
-            color: #667eea;
+            color: #87ceeb;
         }
 
         @media (max-width: 768px) {
@@ -358,24 +425,34 @@
                 <h2>Por que o Vôlei é Incrível?</h2>
                 <div class="cards-grid">
                     <div class="card">
+                        <div class="card-icon">🏐</div>
+                        <h3>História do Vôlei</h3>
+                        <p>Criado em 1895 por William Morgan em Massachusetts, EUA, inicialmente chamado de "Mintonette". O objetivo era criar um esporte menos intenso que o basquete para homens mais velhos.</p>
+                    </div>
+                    <div class="card">
                         <div class="card-icon">⚡</div>
                         <h3>Dinâmico e Rápido</h3>
-                        <p>O vôlei é um esporte de alta velocidade que exige reflexos rápidos, coordenação e trabalho em equipe constante.</p>
+                        <p>O vôlei é um esporte de alta velocidade que exige reflexos rápidos, coordenação e trabalho em equipe constante. Os ataques podem chegar a 130 km/h!</p>
                     </div>
                     <div class="card">
                         <div class="card-icon">🤝</div>
                         <h3>Trabalho em Equipe</h3>
-                        <p>Cada jogada depende da colaboração perfeita entre os 6 jogadores em quadra, criando uma sinergia única.</p>
+                        <p>Cada jogada depende da colaboração perfeita entre os 6 jogadores em quadra, criando uma sinergia única. Nenhum jogador pode tocar a bola duas vezes consecutivas.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon">🌍</div>
                         <h3>Esporte Global</h3>
-                        <p>Praticado em mais de 200 países, o vôlei une culturas e pessoas ao redor do mundo através da paixão pelo esporte.</p>
+                        <p>Praticado em mais de 200 países, o vôlei une culturas e pessoas ao redor do mundo. É o segundo esporte mais popular do mundo depois do futebol.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon">💪</div>
                         <h3>Condicionamento Total</h3>
-                        <p>Desenvolve força, agilidade, coordenação e resistência cardiovascular de forma completa e divertida.</p>
+                        <p>Desenvolve força, agilidade, coordenação e resistência cardiovascular. Um jogador profissional pode saltar mais de 300 vezes em uma partida!</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🏆</div>
+                        <h3>Modalidades</h3>
+                        <p>Vôlei de quadra, vôlei de praia, vôlei sentado (paralímpico), futevôlei e vôlei de neve. Cada modalidade tem suas próprias regras e características especiais.</p>
                     </div>
                 </div>
             </div>
@@ -387,19 +464,27 @@
                 <div class="cards-grid">
                     <div class="card">
                         <h3>🏐 Objetivo do Jogo</h3>
-                        <p>Fazer a bola tocar o chão da quadra adversária ou forçar o erro do time oponente. Cada set é disputado até 25 pontos (vantagem de 2).</p>
+                        <p>Fazer a bola tocar o chão da quadra adversária ou forçar o erro do time oponente. Cada set é disputado até 25 pontos (vantagem de 2). O 5º set vai até 15 pontos.</p>
                     </div>
                     <div class="card">
-                        <h3>👥 Formação da Equipe</h3>
-                        <p>6 jogadores em quadra: 3 na rede (atacantes) e 3 no fundo (defensores). Rotação obrigatória a cada ponto conquistado no saque.</p>
+                        <h3>👥 Posições dos Jogadores</h3>
+                        <p>Levantador, Oposto, Central, Ponteiro e Líbero. Cada posição tem funções específicas: ataque, defesa, bloqueio e levantamento. O líbero só pode defender.</p>
                     </div>
                     <div class="card">
-                        <h3>✋ Toques Permitidos</h3>
-                        <p>Máximo de 3 toques por equipe antes de enviar a bola para o campo adversário. O mesmo jogador não pode tocar duas vezes seguidas.</p>
+                        <h3>✋ Sistema de Toques</h3>
+                        <p>Máximo de 3 toques: recepção/defesa, levantamento e ataque. Bloqueio não conta como toque. Toque duplo e condução são faltas comuns.</p>
                     </div>
                     <div class="card">
-                        <h3>📏 Dimensões da Quadra</h3>
-                        <p>18m x 9m dividida por uma rede de 2,43m (masculino) ou 2,24m (feminino). Linha de ataque a 3m da rede.</p>
+                        <h3>📏 Dimensões Oficiais</h3>
+                        <p>Quadra: 18m x 9m. Rede: 2,43m (masc) / 2,24m (fem). Zona de ataque: 3m da rede. Zona de saque: 9m atrás da linha de fundo.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔄 Sistema de Rotação</h3>
+                        <p>Jogadores rotacionam no sentido horário a cada ponto conquistado no saque. Ordem de saque deve ser mantida. Posição no momento do saque é obrigatória.</p>
+                    </div>
+                    <div class="card">
+                        <h3>⚖️ Principais Faltas</h3>
+                        <p>Toque na rede, invasão de campo, 4 toques, toque duplo, condução, saque fora, rotação incorreta e posicionamento irregular no saque.</p>
                     </div>
                 </div>
             </div>
@@ -418,12 +503,60 @@
                         <div>Fãs Mundiais</div>
                     </div>
                     <div class="stat-card">
+                        <div class="stat-number">130</div>
+                        <div>km/h Velocidade Máxima</div>
+                    </div>
+                    <div class="stat-card">
                         <div class="stat-number">1895</div>
                         <div>Ano de Criação</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">1964</div>
                         <div>Estreia Olímpica</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3.66m</div>
+                        <div>Recorde de Salto Vertical</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">300+</div>
+                        <div>Saltos por Partida</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2.5h</div>
+                        <div>Duração Média do Jogo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tecnicas" class="section">
+            <div class="container">
+                <h2>Técnicas Fundamentais</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🏐 Saque</h3>
+                        <p><strong>Tipos:</strong> Saque por baixo, por cima, flutuante, viagem e jornada. O saque é a única jogada individual do vôlei e pode ser uma arma poderosa.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🤲 Recepção/Manchete</h3>
+                        <p><strong>Fundamento:</strong> Receber o saque adversário com os antebraços unidos. Posição baixa, braços estendidos e plataforma firme são essenciais.</p>
+                    </div>
+                    <div class="card">
+                        <h3>👐 Levantamento/Toque</h3>
+                        <p><strong>Técnica:</strong> Distribuir a bola para os atacantes usando as pontas dos dedos. Precisão, timing e visão de jogo são fundamentais.</p>
+                    </div>
+                    <div class="card">
+                        <h3>⚡ Ataque/Cortada</h3>
+                        <p><strong>Movimento:</strong> Salto, aproximação e golpe forte na bola. Timing da passada, altura do salto e força do braço determinam o sucesso.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🛡️ Bloqueio</h3>
+                        <p><strong>Defesa:</strong> Interceptar o ataque adversário na rede. Pode ser simples, duplo ou triplo. Timing e posicionamento das mãos são cruciais.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🤸 Defesa</h3>
+                        <p><strong>Salvamento:</strong> Impedir que a bola toque o chão após ataques. Inclui manchete, toque, mergulho e rolamento.</p>
                     </div>
                 </div>
             </div>
@@ -610,6 +743,5 @@
             observer.observe(card);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9883dec73175c20f',t:'MTc1OTQwNDY1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9883f89775a5c20f',t:'MTc1OTQwNTcxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
