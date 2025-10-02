@@ -1,1 +1,615 @@
-Site exemplo 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoleiPro - Tudo sobre Vôlei</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><circle fill="%23667eea" cx="200" cy="150" r="50" opacity="0.3"/><circle fill="%23764ba2" cx="800" cy="300" r="80" opacity="0.2"/><circle fill="%23667eea" cx="1000" cy="100" r="60" opacity="0.3"/></svg>');
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .section {
+            padding: 4rem 0;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .quiz-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .quiz-result.excellent {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .quiz-result.good {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .quiz-result.needs-improvement {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                🏐 VoleiPro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#regras">Regras</a></li>
+                <li><a href="#estatisticas">Estatísticas</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1>Bem-vindo ao Mundo do Vôlei</h1>
+                <p>Descubra tudo sobre o esporte mais emocionante do mundo. Regras, técnicas, estatísticas e muito mais!</p>
+                <a href="#sobre" class="cta-button">Explorar Agora</a>
+            </div>
+        </section>
+
+        <section id="sobre" class="section">
+            <div class="container">
+                <h2>Por que o Vôlei é Incrível?</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Dinâmico e Rápido</h3>
+                        <p>O vôlei é um esporte de alta velocidade que exige reflexos rápidos, coordenação e trabalho em equipe constante.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <h3>Trabalho em Equipe</h3>
+                        <p>Cada jogada depende da colaboração perfeita entre os 6 jogadores em quadra, criando uma sinergia única.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🌍</div>
+                        <h3>Esporte Global</h3>
+                        <p>Praticado em mais de 200 países, o vôlei une culturas e pessoas ao redor do mundo através da paixão pelo esporte.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💪</div>
+                        <h3>Condicionamento Total</h3>
+                        <p>Desenvolve força, agilidade, coordenação e resistência cardiovascular de forma completa e divertida.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="regras" class="section">
+            <div class="container">
+                <h2>Regras Básicas</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🏐 Objetivo do Jogo</h3>
+                        <p>Fazer a bola tocar o chão da quadra adversária ou forçar o erro do time oponente. Cada set é disputado até 25 pontos (vantagem de 2).</p>
+                    </div>
+                    <div class="card">
+                        <h3>👥 Formação da Equipe</h3>
+                        <p>6 jogadores em quadra: 3 na rede (atacantes) e 3 no fundo (defensores). Rotação obrigatória a cada ponto conquistado no saque.</p>
+                    </div>
+                    <div class="card">
+                        <h3>✋ Toques Permitidos</h3>
+                        <p>Máximo de 3 toques por equipe antes de enviar a bola para o campo adversário. O mesmo jogador não pode tocar duas vezes seguidas.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📏 Dimensões da Quadra</h3>
+                        <p>18m x 9m dividida por uma rede de 2,43m (masculino) ou 2,24m (feminino). Linha de ataque a 3m da rede.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estatisticas" class="section">
+            <div class="container">
+                <h2>Estatísticas do Vôlei Mundial</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">220+</div>
+                        <div>Países Praticantes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">800M</div>
+                        <div>Fãs Mundiais</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1895</div>
+                        <div>Ano de Criação</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1964</div>
+                        <div>Estreia Olímpica</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="section">
+            <div class="container">
+                <h2>Teste Seus Conhecimentos</h2>
+                <div class="quiz-container">
+                    <div class="question">
+                        <h4>1. Quantos jogadores cada equipe tem em quadra?</h4>
+                        <div class="options">
+                            <div class="option" data-question="1" data-answer="a">A) 5 jogadores</div>
+                            <div class="option" data-question="1" data-answer="b">B) 6 jogadores</div>
+                            <div class="option" data-question="1" data-answer="c">C) 7 jogadores</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>2. Qual a altura da rede no vôlei masculino?</h4>
+                        <div class="options">
+                            <div class="option" data-question="2" data-answer="a">A) 2,24m</div>
+                            <div class="option" data-question="2" data-answer="b">B) 2,43m</div>
+                            <div class="option" data-question="2" data-answer="c">C) 2,50m</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>3. Quantos toques máximos uma equipe pode dar na bola?</h4>
+                        <div class="options">
+                            <div class="option" data-question="3" data-answer="a">A) 2 toques</div>
+                            <div class="option" data-question="3" data-answer="b">B) 3 toques</div>
+                            <div class="option" data-question="3" data-answer="c">C) 4 toques</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>4. Em que ano o vôlei foi criado?</h4>
+                        <div class="options">
+                            <div class="option" data-question="4" data-answer="a">A) 1891</div>
+                            <div class="option" data-question="4" data-answer="b">B) 1895</div>
+                            <div class="option" data-question="4" data-answer="c">C) 1900</div>
+                        </div>
+                    </div>
+
+                    <button class="cta-button" onclick="checkQuiz()" style="margin-top: 2rem;">Ver Resultado</button>
+                    
+                    <div id="quiz-result" class="quiz-result">
+                        <h3 id="result-title"></h3>
+                        <p id="result-message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VoleiPro</h3>
+                    <p>Sua fonte completa de informações sobre vôlei. Aprenda, pratique e se divirta!</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <a href="#regras">Regras Oficiais</a>
+                    <a href="#estatisticas">Estatísticas</a>
+                    <a href="#quiz">Quiz Interativo</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📧 contato@voleipro.com</p>
+                    <p>📱 (11) 99999-9999</p>
+                </div>
+            </div>
+            <p>&copy; 2024 VoleiPro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Sistema de quiz interativo
+        const quizAnswers = {
+            1: 'b', // 6 jogadores
+            2: 'b', // 2,43m
+            3: 'b', // 3 toques
+            4: 'b'  // 1895
+        };
+
+        let selectedAnswers = {};
+
+        // Adicionar event listeners para as opções do quiz
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.dataset.question;
+                const answer = this.dataset.answer;
+                
+                // Remove seleção anterior da mesma pergunta
+                document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Adiciona seleção atual
+                this.classList.add('selected');
+                selectedAnswers[question] = answer;
+            });
+        });
+
+        function checkQuiz() {
+            let correctAnswers = 0;
+            const totalQuestions = Object.keys(quizAnswers).length;
+            
+            // Verifica se todas as perguntas foram respondidas
+            if (Object.keys(selectedAnswers).length < totalQuestions) {
+                alert('Por favor, responda todas as perguntas antes de ver o resultado!');
+                return;
+            }
+            
+            // Conta respostas corretas
+            for (let question in quizAnswers) {
+                if (selectedAnswers[question] === quizAnswers[question]) {
+                    correctAnswers++;
+                }
+            }
+            
+            // Mostra resultado
+            const resultDiv = document.getElementById('quiz-result');
+            const resultTitle = document.getElementById('result-title');
+            const resultMessage = document.getElementById('result-message');
+            
+            resultDiv.classList.remove('excellent', 'good', 'needs-improvement');
+            
+            if (correctAnswers === totalQuestions) {
+                resultDiv.classList.add('excellent');
+                resultTitle.textContent = '🏆 Excelente!';
+                resultMessage.textContent = `Parabéns! Você acertou todas as ${correctAnswers} perguntas. Você é um verdadeiro expert em vôlei!`;
+            } else if (correctAnswers >= totalQuestions * 0.7) {
+                resultDiv.classList.add('good');
+                resultTitle.textContent = '👏 Muito Bom!';
+                resultMessage.textContent = `Você acertou ${correctAnswers} de ${totalQuestions} perguntas. Seu conhecimento sobre vôlei está ótimo!`;
+            } else {
+                resultDiv.classList.add('needs-improvement');
+                resultTitle.textContent = '📚 Continue Estudando!';
+                resultMessage.textContent = `Você acertou ${correctAnswers} de ${totalQuestions} perguntas. Que tal revisar as regras e tentar novamente?`;
+            }
+            
+            resultDiv.classList.add('show');
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Animação de entrada para cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animação aos cards
+        document.querySelectorAll('.card, .stat-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9883dec73175c20f',t:'MTc1OTQwNDY1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
